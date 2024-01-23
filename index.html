@@ -236,24 +236,23 @@ let myNerfGun = new NerfGun(10)
        
         this.ants = ants.map((name) => ({ name, health: 100 }));
     }
- 
-   
     work() {
         if (this.ants.length === 0) {
-        return  ["0 Ants starting work!","Did you work them to death?"] 
+          return "No ants here. Did you work them to death?";
         }
+        let message = `${this.ants.length} ants starting work!`;
+        this.ants.forEach((ant) => {
+          ant.health -= 20;
+        });
+        this.ants = this.ants.filter((ant) => ant.health >
+          0);
+
+        return message
+      }
+
  
-        for (let i = 0; i < this.ants.length; i++) {
-            this.ants[i].health -= 20;
- 
-            if (this.ants[i].health <= 0) {
-                this.ants.splice(i, 1);
-                i--;
-            }
-        }
- 
-        return `${this.ants.length} ants starting work!`;
-    }
+   
+    
  
     
     feed(name) {
